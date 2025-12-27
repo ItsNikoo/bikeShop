@@ -1,6 +1,5 @@
-from typing import Annotated
-
 from fastapi import APIRouter, Depends, HTTPException
+from pydantic import ValidationError
 
 from dependencies import get_bike_repo
 from repositories.bike_repository import BikeRepository
@@ -28,11 +27,14 @@ async def get_bike_by_id(
 
 @router.post("", description="Создать сущность велосипеда")
 async def create_bike(
-        bike_data: Annotated[BikeCreate, Depends()],
+        bike_data: BikeCreate,
         repository: BikeRepository = Depends(get_bike_repo)
 ):
-    bike = await repository.create(bike_data)
-    return bike
+    try:
+        bike = await repository.create(bike_data)
+        return bike
+    except ValidationError as e:
+        raise HTTPException(status_code=400, detail=e)
 
 
 @router.delete("/{bike_id}", description="Удалить сущность велосипеда по id")
@@ -49,7 +51,7 @@ async def delete_bike(
 @router.patch("/{bike_id}", description="Отредактировать сущность велосипеда по id")
 async def update_bike(
         bike_id: int,
-        bike_data: Annotated[BikeUpdate, Depends()],
+        bike_data: BikeUpdate,
         repository: BikeRepository = Depends(get_bike_repo),
 ):
     updated_bike = await repository.patch(bike_id, bike_data)

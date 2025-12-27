@@ -1,0 +1,75 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+
+# IDEs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Byte-compiled / optimized / DLL files
+*.so
+*.dylib
+*.dll
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+*.egg
+pip-wheel-metadata/
+*.whl
+
+# Logs
+*.log
+
+# Database / local files
+*.sqlite3
+*.db
+*.db-journal
+
+# FastAPI / Starlette / Pydantic
+*.pyc
+
+# Migrations
+migrations/
+alembic.ini
+
+# Environment variables
+.env
+.env.*
+
+# Docker
+docker-compose.override.yml
+*.dockerignore
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+.pyre/
+.pytype/
+
+# Coverage
+htmlcov/
+.coverage
+coverage.xml
+
+# Pytest
+.pytest_cache/
+.cache/
+
+# Other
+*.bak
+*.swp
+*.tmp
+
+bikes.db
