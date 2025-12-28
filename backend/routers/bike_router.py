@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import ValidationError
 
 from dependencies import get_bike_repo
@@ -25,7 +25,7 @@ async def get_bike_by_id(
     return bike
 
 
-@router.post("", description="Создать сущность велосипеда")
+@router.post("", description="Создать сущность велосипеда", status_code=status.HTTP_201_CREATED)
 async def create_bike(
         bike_data: BikeCreate,
         repository: BikeRepository = Depends(get_bike_repo)
