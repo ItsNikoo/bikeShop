@@ -2,6 +2,8 @@ from fastapi import Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 from database import new_session
 from repositories.bike_repository import BikeRepository
+from repositories.brand_repository import BrandRepository
+
 
 # Зависимость для сессии базы данных
 async def get_db() -> AsyncSession:
@@ -10,5 +12,9 @@ async def get_db() -> AsyncSession:
 
 # Зависимость для репозитория велосипедов
 async def get_bike_repo(db: AsyncSession = Depends(get_db)) -> BikeRepository:
-    """Dependency, возвращающая репозиторий с привязанной сессией"""
+    """Dependency, возвращающая репозиторий велосипедов с привязанной сессией"""
     return BikeRepository(db)
+
+async def get_brand_repo(db: AsyncSession = Depends(get_db)) -> BrandRepository:
+    """Dependency, возвращающая репозиторий брендов с привязанной сессией"""
+    return BrandRepository(db)

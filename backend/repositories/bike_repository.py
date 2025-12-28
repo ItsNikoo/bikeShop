@@ -24,7 +24,7 @@ class BikeRepository:
         bike = BikeTable(**bike_data.model_dump())
         self.session.add(bike)
         await self.session.commit()
-        await self.session.refresh(bike)
+        await self.session.refresh(bike, ["brand"])
         return bike
 
     async def delete(self, bike_id: int):
