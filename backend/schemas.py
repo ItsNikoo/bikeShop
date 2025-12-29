@@ -1,6 +1,7 @@
 import datetime
 from typing import Optional
-from pydantic import BaseModel, field_validator
+from pydantic import BaseModel, field_validator, ConfigDict
+
 
 # Схемы для Brand
 class BrandBase(BaseModel):
@@ -12,6 +13,7 @@ class BrandBase(BaseModel):
 class BrandCreate(BrandBase):
     pass
 
+
 class BrandUpdate(BaseModel):
     name: Optional[str] = None
     description: Optional[str] = None
@@ -21,8 +23,9 @@ class BrandUpdate(BaseModel):
 class Brand(BrandBase):
     id: int
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(
+        from_attributes=True,
+    )
 
 
 # Схемы для Bike
@@ -72,5 +75,6 @@ class Bike(BikeBase):
     id: int
     brand: Brand  # Включаем информацию о бренде
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(
+        from_attributes=True,
+    )
